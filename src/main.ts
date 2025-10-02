@@ -1,7 +1,7 @@
 function convertRtfToString (rtf: any): string {
   let s = rtf.toString()
 
-  s = s.replace(/\{\\fs\d+\s+(\d[^}]*)\}/gi, "$1");
+  s = s.replace(/\{\\[a-z]+\d+\s+([^}]*)\}/gi, "$1");
   s = s.replace(/\\par[d]?/g, "")
   s = s.replace(/\{\*?\\[^{}]+}|[{}]|\\\n?[A-Za-z]+\n?(?:-?\d+)?[ ]?/g, "")
 
@@ -28,6 +28,8 @@ function convertRtfToString (rtf: any): string {
   return s.trim()
 }
 
-let s = convertRtfToString('teste');
+let s = convertRtfToString(String.raw`
+teste
+`);
 
 console.log(s);
